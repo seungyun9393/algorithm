@@ -4,9 +4,10 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.Arrays;
 
 public class Q9461 {
-	static int[] P = new int[105];
+	static Long[] P = new Long[101];
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int C = Integer.parseInt(br.readLine());
@@ -16,6 +17,7 @@ public class Q9461 {
 			bw.write(String.valueOf(reverse(Integer.parseInt(br.readLine()))));
 			bw.newLine();
 		}
+		System.out.println(Arrays.toString(P));
 		bw.close();
 	}
 	
@@ -27,13 +29,15 @@ public class Q9461 {
 			- P[i] = P[i-5] + P[i-1]
 		3. 초기값 작성
 	*/ 
-	static int reverse(int N) {
-		P[0] = P[1] = P[2] = 1;
-		P[3] = P[4] = 2;
-		
-		for(int i=5; i<=N; i++) {
+	static Long reverse(int N) {
+		P[1] = P[2] = P[3] = 1L;
+		P[4] = P[5] = 2L;
+
+		if(N <= 5) return P[N];
+
+		for(int i=6; i<N+1; i++) {
 			P[i] = P[i-5] + P[i-1];
 		}
-		return P[N-1];
+		return P[N];
 	}
 }
